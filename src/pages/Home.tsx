@@ -1,8 +1,8 @@
 import React from 'react'
 import CardContainer from '../components/cardContainer'
 
-function App() {
-  const warningStyle = {
+function Home() {
+  const warningStyle: React.CSSProperties = {
     color: 'red',
     fontSize: '.8rem',
     fontWeight: 'bold',
@@ -28,19 +28,7 @@ function App() {
             style={{
               fontSize: '.6rem',
             }}
-          >
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href="https://icons8.com/icon/tx3AdinOQ2kf/bank"
-            >
-              Bank
-            </a>{' '}
-            icon by{' '}
-            <a target="_blank" rel="noreferrer" href="https://icons8.com">
-              Icons8
-            </a>
-          </div>
+          ></div>
           <p style={warningStyle}>For educational use only.</p>
         </>
       }
@@ -48,4 +36,4 @@ function App() {
   )
 }
 
-export default App
+export default Home
