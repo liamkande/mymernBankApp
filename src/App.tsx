@@ -4,7 +4,7 @@ import Signup from './pages/Signup'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Routes>

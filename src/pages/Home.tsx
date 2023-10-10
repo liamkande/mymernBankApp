@@ -1,7 +1,7 @@
 import React from 'react'
 import CardContainer from '../components/cardContainer'
 
-function Home() {
+const Home = () => {
   const warningStyle: React.CSSProperties = {
     color: 'red',
     fontSize: '.8rem',
