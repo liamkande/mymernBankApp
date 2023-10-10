@@ -10,14 +10,7 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+          This represents the culmination of my academic journey in the prestigious MIT Professional Certificate program in Coding: Full Stack Development – a capstone project that showcases my mastery of cutting-edge technology and programming expertise, solidifying my status as a forward-thinking and accomplished developer.
       </header>
     </div>
   );
