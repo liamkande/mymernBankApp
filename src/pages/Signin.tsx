@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 import CardContainer from '../components/cardContainer'
-import { FaUserPlus } from 'react-icons/fa'
+import { FaSignInAlt } from 'react-icons/fa'
 
 const passwordContainer: React.CSSProperties = {
   display: 'flex',
@@ -9,12 +9,11 @@ const passwordContainer: React.CSSProperties = {
 
 const Signup: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
   })
 
-  const { name, email, password } = formData
+  const { email, password } = formData
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -31,22 +30,10 @@ const Signup: React.FC = () => {
     <CardContainer
       bgcolor="success"
       opacity="10"
-      header={<>Sign Up</>}
+      header={<>Sign In</>}
       body={
         <>
           <form onSubmit={handleSubmit}>
-            Name
-            <br />
-            <input
-              type="input"
-              className="form-control"
-              id="name"
-              name="name"
-              placeholder="Enter name"
-              value={name}
-              onChange={onChange}
-            />
-            <br />
             Email
             <br />
             <input
@@ -74,7 +61,7 @@ const Signup: React.FC = () => {
             </div>
             <br />
             <button type="submit" className="btn btn-outline-success">
-              <FaUserPlus /> Sign Up
+              <FaSignInAlt /> Log In
             </button>
           </form>
         </>
