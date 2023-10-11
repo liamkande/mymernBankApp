@@ -7,7 +7,7 @@ const passwordContainer: React.CSSProperties = {
   position: 'relative',
 }
 
-const Signin: React.FC = () => {
+const Deposit: React.FC = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -70,4 +70,4 @@ const Signin: React.FC = () => {
   )
 }
 
-export default Signin
+export default Deposit
