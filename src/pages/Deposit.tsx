@@ -30,7 +30,7 @@ const Deposit: React.FC = () => {
     <CardContainer
       bgcolor="success"
       opacity="10"
-      header={<>Sign In</>}
+      header={<>Deposit</>}
       body={
         <>
           <form onSubmit={handleSubmit}>

@@ -1,4 +1,5 @@
 import React from 'react'
+import NavigationBar from './components/NavigationBar'
 import Home from './pages/Home'
 import Signup from './pages/Signup'
 import Signin from './pages/Signin'
@@ -12,6 +13,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 const App = () => {
   return (
     <Router>
+      <NavigationBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
