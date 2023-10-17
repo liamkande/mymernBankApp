@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { register } from '../auth/userAuth';
 import CardContainer from '../components/cardContainer';
 import { FaUserPlus } from 'react-icons/fa';
+import { ThunkDispatch } from 'redux-thunk';
 
 
 const passwordContainer: React.CSSProperties = {
@@ -18,7 +19,7 @@ const Signup: React.FC = () => {
   });
 
   const { name, email, password } = formData;
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<ThunkDispatch<any, undefined, any>>();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -27,7 +28,7 @@ const Signup: React.FC = () => {
       email,
       password,
     };
-    // @ts-ignore
+
     dispatch(register(userData));
     console.log('submit');
     alert(JSON.stringify(userData))
