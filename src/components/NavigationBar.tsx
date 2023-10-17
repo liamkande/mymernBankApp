@@ -20,7 +20,7 @@ export const NavigationBar: React.FC = () => {
       <Container>
         <Navbar.Brand>
           <h2>
-           Mern Bank App
+            Mern Bank App
             <sub style={{ fontSize: '.75rem' }}> by @liamkande </sub>
           </h2>
         </Navbar.Brand>
@@ -49,7 +49,7 @@ export const NavigationBar: React.FC = () => {
               }}
               href="/signup"
             >
-                Sign Up
+              Sign Up
             </Nav.Link>
             <Nav.Link
               onClick={() => {
