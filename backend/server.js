@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
-// Serve static files from the "public" directory inside the "frontend" folder
-app.use(express.static('frontend/public'));
-app.use(cors());
+const port = process.env.PORT || 3001;
 
-// Define your routes and other middleware here
+// Import the dataRoutes router
+const dataRoutes = require('./dataRoutes');
 
-// Start the server
-app.listen(3001, () => {
-    console.log('Server is running on port 3001');
+// Mount the dataRoutes
+app.use('/', dataRoutes);
+
+app.listen(port, () => {
+    console.log(`Express server is running on port ${port}`);
 });
