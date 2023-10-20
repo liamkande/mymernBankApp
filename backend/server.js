@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-
 // Serve static files from the "public" directory inside the "frontend" folder
 app.use(express.static('frontend/public'));
 app.use(cors());
