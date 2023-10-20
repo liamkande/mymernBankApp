@@ -1,0 +1,13 @@
+{
+  "name": "mern-bank-app",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/liamkande/myBankingApp.git",
+  "author": "liamkande <liamkande@icloud.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
