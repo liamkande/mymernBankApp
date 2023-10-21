@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import CardContainer from '../components/cardContainer'
 
 const Home = () => {
@@ -8,13 +8,13 @@ const Home = () => {
     fontWeight: 'bold',
     marginBottom: '1rem',
   }
-    const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('')
 
-    useEffect(() => {
-        fetch('/api/data')
-            .then((res) => res.json())
-            .then((data) => setMessage(data.message));
-    }, []);
+  useEffect(() => {
+    fetch('api/data')
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message))
+  }, [])
 
   return (
     <CardContainer

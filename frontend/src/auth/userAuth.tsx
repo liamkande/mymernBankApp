@@ -20,8 +20,14 @@ export const register = createAsyncThunk<User, User, { rejectValue: string }>(
   'auth/register',
   async (user, thunkAPI) => {
     try {
-      const response = await authService.register(user)
-      return response.data
+      // Send a POST request to the user registration route
+      const data = await authService.register(user)
+
+      // You can handle the response here as needed
+      alert(data.message)
+      console.log(data)
+
+      return data
     } catch (error: any) {
       const message =
         (error.response &&

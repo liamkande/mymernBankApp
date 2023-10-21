@@ -20,6 +20,7 @@ const Signup: React.FC = () => {
   const { name, email, password } = formData
   const dispatch = useDispatch<ThunkDispatch<any, undefined, any>>()
 
+  // Dispatch the register action when the form is submitted
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     const userData = {
@@ -29,8 +30,6 @@ const Signup: React.FC = () => {
     }
 
     dispatch(register(userData))
-    console.log('submit')
-    alert(JSON.stringify(userData))
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
