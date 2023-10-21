@@ -8,7 +8,7 @@ router.get('/api/data', (req, res) => {
 });
 
 // New route for creating a user account
-router.post('/api/register', (req, res) => {
+router.post('/api/users', (req, res) => {
     const { name, email, password } = req.body;
 
     res.json({
