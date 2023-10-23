@@ -1,23 +1,33 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
+import { useDispatch } from 'react-redux'
+import { login } from '../auth/userAuth' // Import your login action
 import CardContainer from '../components/cardContainer'
 import { FaSignInAlt } from 'react-icons/fa'
+import { ThunkDispatch } from 'redux-thunk'
 
 const passwordContainer: React.CSSProperties = {
   display: 'flex',
   position: 'relative',
 }
 
-const Signin: React.FC = () => {
+const Login: React.FC = () => {
   const [formData, setFormData] = useState({
+    name: '',
     email: '',
     password: '',
   })
 
   const { email, password } = formData
 
+  const dispatch = useDispatch<ThunkDispatch<any, undefined, any>>()
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    console.log('submit')
+
+    // Dispatch the login action with the user's credentials
+    dispatch(login(formData))
+
+    console.log('Logging in...') // You can add loading or feedback UI here
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -37,7 +47,7 @@ const Signin: React.FC = () => {
             Email
             <br />
             <input
-              type="input"
+              type="email" // Use type 'email' for email input
               className="form-control"
               id="email"
               name="email"
@@ -70,4 +80,4 @@ const Signin: React.FC = () => {
   )
 }
 
-export default Signin
+export default Login

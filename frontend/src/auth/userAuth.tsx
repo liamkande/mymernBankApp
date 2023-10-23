@@ -41,6 +41,30 @@ export const register = createAsyncThunk<User, User, { rejectValue: string }>(
   }
 )
 
+// Define a new async thunk for user login
+export const login = createAsyncThunk<User, User, { rejectValue: string }>(
+  'auth/login',
+  async (credentials, thunkAPI) => {
+    try {
+      const data = await authService.login(credentials)
+
+      alert(data.message)
+      console.log(data)
+
+      return data
+    } catch (error: any) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      toast.error(message)
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 // Define your Redux slice
 const userAuth = createSlice({
   name: 'auth',

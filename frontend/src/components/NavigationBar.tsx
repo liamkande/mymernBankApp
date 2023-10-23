@@ -53,6 +53,14 @@ export const NavigationBar: React.FC = () => {
             </Nav.Link>
             <Nav.Link
               onClick={() => {
+                setTitle('login')
+              }}
+              href="/login"
+            >
+              Log In
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
                 setTitle('Deposit')
               }}
               href="/deposit"
