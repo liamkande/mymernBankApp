@@ -36,7 +36,7 @@ router.post('/api/users/login', (req, res) => {
         res.json({ message: 'Login successful', user: { email } });
     } else {
         // Authentication failed
-        res.status(401).json({ message: 'Login failed' });
+        res.json({ message: 'Invalid credentials' });
     }
 });
 

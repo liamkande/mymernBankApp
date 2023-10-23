@@ -47,8 +47,7 @@ export const login = createAsyncThunk<User, User, { rejectValue: string }>(
   async (credentials, thunkAPI) => {
     try {
       const data = await authService.login(credentials)
-
-      alert(data.message)
+      alert(data?.message)
       console.log(data)
 
       return data
