@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 import { useDispatch } from 'react-redux'
-import { login } from '../auth/userAuth' // Import your login action
+import {login} from '../auth/userAuth' // Import your login action
 import CardContainer from '../components/cardContainer'
 import { FaSignInAlt } from 'react-icons/fa'
 import { ThunkDispatch } from 'redux-thunk'
@@ -23,11 +23,17 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-
-    // Dispatch the login action with the user's credentials
-    dispatch(login(formData))
-
-    console.log('Logging in...') // You can add loading or feedback UI here
+    const userFromLocalStorage = localStorage.getItem('user');
+    if (userFromLocalStorage) {
+      const user = JSON.parse(userFromLocalStorage);
+      if (user.email === email && user.password === password) {
+        dispatch(login(user));
+        console.log('user is valid');
+      }
+      if(user.email !== email || user.password !== password) {
+        alert('user is not valid')
+      }
+    }
   }
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) =>

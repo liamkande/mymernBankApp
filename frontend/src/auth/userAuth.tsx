@@ -24,7 +24,7 @@ export const register = createAsyncThunk<User, User, { rejectValue: string }>(
       const data = await authService.register(user)
 
       // You can handle the response here as needed
-      alert(data.message)
+      alert(data?.message)
       console.log(data)
 
       return data
@@ -47,9 +47,7 @@ export const login = createAsyncThunk<User, User, { rejectValue: string }>(
   async (credentials, thunkAPI) => {
     try {
       const data = await authService.login(credentials)
-      alert(data?.message)
       console.log(data)
-
       return data
     } catch (error: any) {
       const message =

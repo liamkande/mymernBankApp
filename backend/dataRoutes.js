@@ -6,7 +6,6 @@ router.use(express.json());
 const users = [
     { email: 'user1@example.com', password: 'password1' },
     { email: 'liamkande@icloud.com', password: '123456' },
-
 ];
 
 // Route for creating a user account
@@ -19,6 +18,7 @@ router.post('/api/users/signup', (req, res) => {
         message: 'User registered successfully',
         name,
         email,
+        password,
     });
 });
 
