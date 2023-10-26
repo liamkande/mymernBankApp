@@ -10,7 +10,7 @@ To get the app up and running, follow the steps below.
 
 ### Prerequisites
 
-- You need to have Node.js installed on your system. 
+- You need to have Node.js installed on your system.
 - You also need to have Docker installed to set up a MongoDB instance in a container.
 
 ### Installation
@@ -23,11 +23,15 @@ To get the app up and running, follow the steps below.
 
    ```bash
    npm install
-    
+
+   ```
+
 4. Create a MongoDB Docker image by running the following command:
- ```bash
-   docker run -p 27017:27017 --name mybank -d mongo
+
+```bash
+  docker run -p 27017:27017 --name mybank -d mongo
 
 
 
 
+```

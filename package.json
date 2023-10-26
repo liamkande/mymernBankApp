@@ -9,6 +9,9 @@
     "client": "npm start --prefix frontend",
     "build": "npm run build --prefix frontend"
   },
+  "devDependencies": {
+    "prettier": "3.0.3"
+  },
   "author": "liamkande <liamkande@icloud.com>",
   "license": "MIT"
 }

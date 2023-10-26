@@ -1,28 +1,28 @@
 const Login = () => {
-  const ctx = React.useContext(UserContext);
-  const [show, setShow] = React.useState(true);
-  const [status, setStatus] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const ctx = React.useContext(UserContext)
+  const [show, setShow] = React.useState(true)
+  const [status, setStatus] = React.useState('')
+  const [email, setEmail] = React.useState('')
+  const [password, setPassword] = React.useState('')
 
   const handleLogin = () => {
     fetch(`/account/login/${email}/${password}`)
       .then((response) => response.text())
       .then((text) => {
         try {
-          const data = JSON.parse(text);
-          setStatus('Login successful');
-          setShow(false);
-          ctx.setUser(data.value); // Set the user data in the context
-          console.log('JSON:', data);
+          const data = JSON.parse(text)
+          setStatus('Login successful')
+          setShow(false)
+          ctx.setUser(data.value) // Set the user data in the context
+          console.log('JSON:', data)
         } catch (err) {
-          setStatus(text);
-          console.log('err:', text);
+          setStatus(text)
+          console.log('err:', text)
         }
-      });
+      })
   }
 
-  const LoginMsg = ({setShow, setStatus, user}) => {
+  const LoginMsg = ({ setShow, setStatus, user }) => {
     return (
       <>
         <h5>Success</h5>
@@ -30,8 +30,8 @@ const Login = () => {
           type="submit"
           className="btn btn-light"
           onClick={() => {
-            setShow(true);
-            setStatus('');
+            setShow(true)
+            setStatus('')
           }}
         >
           Authenticate again
@@ -43,10 +43,10 @@ const Login = () => {
           </>
         )}
       </>
-    );
+    )
   }
 
-const LoginForm = () => {
+  const LoginForm = () => {
     return (
       <>
         Email
@@ -73,7 +73,7 @@ const LoginForm = () => {
           Login
         </button>
       </>
-    );
+    )
   }
 
   return (
@@ -82,8 +82,14 @@ const LoginForm = () => {
         bgcolor="secondary"
         header="Login"
         status={status}
-        body={show ? <LoginForm /> : <LoginMsg setShow={setShow} setStatus={setStatus} user={ctx.user}/>}
+        body={
+          show ? (
+            <LoginForm />
+          ) : (
+            <LoginMsg setShow={setShow} setStatus={setStatus} user={ctx.user} />
+          )
+        }
       />
     </div>
-  );
+  )
 }
