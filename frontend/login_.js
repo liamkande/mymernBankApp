@@ -1,4 +1,4 @@
-function Login(){
+const Login = () => {
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');    
 
@@ -14,18 +14,18 @@ function Login(){
   ) 
 }
 
-function LoginMsg(props){
+const LoginMsg = ({setShow}) => {
   return(<>
     <h5>Success</h5>
     <button type="submit" 
       className="btn btn-light" 
-      onClick={() => props.setShow(true)}>
+      onClick={() => setShow(true)}>
         Authenticate again
     </button>
   </>);
 }
 
-function LoginForm(props){
+const LoginForm = ({setShow, setStatus}) => {
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -35,11 +35,11 @@ function LoginForm(props){
     .then(text => {
         try {
             const data = JSON.parse(text);
-            props.setStatus('');
-            props.setShow(false);
+            setStatus('');
+            setShow(false);
             console.log('JSON:', data);
         } catch(err) {
-            props.setStatus(text)
+            setStatus(text)
             console.log('err:', text);
         }
     });

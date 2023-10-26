@@ -1,4 +1,4 @@
-function AllData(){
+const AllData = () => {
     const [data, setData] = React.useState('');    
 
     React.useEffect(() => {

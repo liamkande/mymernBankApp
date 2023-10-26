@@ -1,4 +1,4 @@
-function Login(){
+const Login = () => {
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
   const [user, setUser] = React.useState(null);
@@ -20,21 +20,21 @@ function Login(){
 }
  
 
-function LoginMsg(props) {
+const LoginMsg = ({user, setShow}) => {
   return (
     <>
-      <h5>Welcome: {props.user ? props.user.name : 'Guest'}</h5>
+      <h5>Welcome: {user ? user.name : 'Guest'}</h5>
       <button
         type="submit"
         className="btn btn-light"
-        onClick={() => props.setShow(true)}
+        onClick={() => setShow(true)}
       >
         Authenticate again
       </button>
     </>
   );
 }
-function LoginForm(props) {
+const LoginForm = ({setStatus, setShow, setUser}) => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
   
@@ -49,12 +49,12 @@ function LoginForm(props) {
             localStorage.setItem('user', JSON.stringify(data));
             console.log('Balance:', data.balance);
             console.log('User:', data.name);
-            props.setStatus('');
-            props.setShow(false);
-            props.setUser(data); 
+            setStatus('');
+            setShow(false);
+            setUser(data);
             console.log('JSON:', data);
           } catch(err) {
-            props.setStatus(text);
+            setStatus(text);
             console.log('err:', text);
           }
         });

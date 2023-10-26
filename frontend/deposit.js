@@ -1,10 +1,10 @@
-function Deposit() {
+const  Deposit = () => {
   const [show, setShow] = React.useState(true);
   const [status, setStatus] = React.useState('');
   const loggedInUser = JSON.parse(localStorage.getItem('user'));
 
 
-  function handleDeposit(amount) {
+  const handleDeposit = (amount) => {
     fetch(`/account/update/${loggedInUser.email}/${amount}`)
       .then(response => response.text())
       .then(text => {
@@ -40,18 +40,18 @@ function Deposit() {
   );
 }
 
-function DepositMsg(props) {
+const DepositMsg = ({setShow, setStatus, user}) => {
   return (
     <>
     <h5>Success</h5>
      
-    {/* <h5>Success {props.user.name}, your new balance is {props.user.balance} dollars</h5> */}
+    <h5>Success {user.name}, your new balance is {user.balance} dollars</h5>
       <button
         type="submit"
         className="btn btn-light"
         onClick={() => {
-          props.setShow(true);
-          props.setStatus('');
+          setShow(true);
+          setStatus('');
         }}
       >
         Deposit again
@@ -60,16 +60,16 @@ function DepositMsg(props) {
   );
 }
 
-function DepositForm(props) {
+const DepositForm = ({user, handleDeposit}) => {
   const [amount, setAmount] = React.useState('');
 
-  function handle() {
-    props.handleDeposit(amount);
+  const handle = () => {
+    handleDeposit(amount);
   }
 
   return (
     <>
-     Welcome Back: {props.user.name} {/* Display the user's name */}
+     Welcome Back: {user.name} {/* Display the user's name */}
         <br />
       Amount<br />
       <input

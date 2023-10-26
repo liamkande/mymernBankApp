@@ -1,4 +1,4 @@
-function Withdraw() {
+const Withdraw = ()  =>{
     const [show, setShow] = React.useState(true);
     const [status, setStatus] = React.useState('');
     const [loggedInUser, setLoggedInUser] = React.useState(JSON.parse(localStorage.getItem('user')));
@@ -27,16 +27,16 @@ function Withdraw() {
     );
   }
   
-  function WithdrawMsg(props) {
+  const WithdrawMsg = ({setShow,setStatus, user, updateUserBalance}) => {
     return (
       <>
-        <h5>Success {props.user.name}, your new balance is {props.updateUserBalance} dollars</h5>
+        <h5>Success {user.name}, your new balance is {updateUserBalance} dollars</h5>
         <button
           type="submit"
           className="btn btn-light"
           onClick={() => {
-            props.setShow(true);
-            props.setStatus('');
+            setShow(true);
+            setStatus('');
           }}>
           Withdraw again
         </button>
@@ -44,21 +44,21 @@ function Withdraw() {
     );
   }
   
-  function WithdrawForm(props) {
+const WithdrawForm = ({user,setStatus, setShow, updateUserBalance }) => {
     const [amount, setAmount] = React.useState('');
   
     function handle() {
-      fetch(`/account/update/${props.user.email}/-${amount}`)
+      fetch(`/account/update/${user.email}/-${amount}`)
         .then(response => response.text())
         .then(text => {
           try {
             const data = JSON.parse(text);
-            props.setStatus(JSON.stringify(data.value));
-            props.setShow(false);
-            props.updateUserBalance(data.newBalance); // Update user balance after successful withdrawal
+            setStatus(JSON.stringify(data.value));
+            setShow(false);
+            updateUserBalance(data.newBalance); // Update user balance after successful withdrawal
             console.log('JSON:', data);
           } catch (err) {
-            props.setStatus('Withdrawal failed');
+            setStatus('Withdrawal failed');
             console.log('err:', text);
           }
         });
@@ -66,7 +66,7 @@ function Withdraw() {
   
     return (
       <>
-        Welcome Back: {props.user.name} <br />
+        Welcome Back: {user.name} <br />
         Amount<br />
         <input
           type="number"

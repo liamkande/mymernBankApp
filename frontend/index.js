@@ -1,4 +1,4 @@
-function Spa() {
+const Spa = () => {
   return (
     <HashRouter>
       <div>

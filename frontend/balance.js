@@ -1,4 +1,4 @@
-function Balance(){
+const  Balance = () => {
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
   const loggedInUser = JSON.parse(localStorage.getItem('user'));

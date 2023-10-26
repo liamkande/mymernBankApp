@@ -1,11 +1,11 @@
-function Login() {
+const Login = () => {
   const ctx = React.useContext(UserContext);
   const [show, setShow] = React.useState(true);
   const [status, setStatus] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  function handleLogin() {
+  const handleLogin = () => {
     fetch(`/account/login/${email}/${password}`)
       .then((response) => response.text())
       .then((text) => {
@@ -22,8 +22,7 @@ function Login() {
       });
   }
 
-  function LoginMsg(props) {
-    const { user } = props;
+  const LoginMsg = ({setShow, setStatus, user}) => {
     return (
       <>
         <h5>Success</h5>
@@ -31,8 +30,8 @@ function Login() {
           type="submit"
           className="btn btn-light"
           onClick={() => {
-            props.setShow(true);
-            props.setStatus('');
+            setShow(true);
+            setStatus('');
           }}
         >
           Authenticate again
@@ -47,7 +46,7 @@ function Login() {
     );
   }
 
-  function LoginForm() {
+const LoginForm = () => {
     return (
       <>
         Email

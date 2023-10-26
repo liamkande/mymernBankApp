@@ -1,4 +1,4 @@
-function CreateAccount(){
+const CreateAccount = () => {
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');
 
@@ -14,21 +14,21 @@ function CreateAccount(){
   )
 }
 
-function CreateMsg(props){
+const CreateMsg = ({setShow}) => {
   return(<>
     <h5>Success</h5>
     <button type="submit" 
       className="btn btn-light" 
-      onClick={() => props.setShow(true)}>Add another account</button>
+      onClick={() => setShow(true)}>Add another account</button>
   </>);
 }
 
-function CreateForm(props){
+const CreateForm = ({setShow}) => {
   const [name, setName]         = React.useState('');
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  function handle(){
+  const handle = () => {
     console.log(name,email,password);
     const url = `/account/create/${name}/${email}/${password}`;
     (async () => {
@@ -36,7 +36,7 @@ function CreateForm(props){
         var data = await res.json();    
         console.log(data);        
     })();
-    props.setShow(false);
+    setShow(false);
   }    
 
   return (<>

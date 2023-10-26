@@ -1,4 +1,4 @@
-function Withdraw(){
+const Withdraw = () =>{
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');  
 
@@ -14,21 +14,21 @@ function Withdraw(){
   )
 }
 
-function WithdrawMsg(props){
+const WithdrawMsg = ({setShow, setStatus}) => {
   return(<>
     <h5>Success</h5>
     <button type="submit" 
       className="btn btn-light" 
       onClick={() => {
-        props.setShow(true);
-        props.setStatus('');
+        setShow(true);
+        setStatus('');
       }}>
         Withdraw again
     </button>
   </>);
 }
 
-function WithdrawForm(props){
+const WithdrawForm = ({setStatus, setShow}) => {
   const [email, setEmail]   = React.useState('');
   const [amount, setAmount] = React.useState('');
 
@@ -38,11 +38,11 @@ function WithdrawForm(props){
     .then(text => {
         try {
             const data = JSON.parse(text);
-            props.setStatus(JSON.stringify(data.value));
-            props.setShow(false);
+            setStatus(JSON.stringify(data.value));
+            setShow(false);
             console.log('JSON:', data);
         } catch(err) {
-            props.setStatus('Deposit failed')
+            setStatus('Deposit failed')
             console.log('err:', text);
         }
     });

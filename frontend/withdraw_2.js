@@ -1,4 +1,4 @@
-function Withdraw() {
+const Withdraw = () =>  {
     const [show, setShow] = React.useState(true);
     const [status, setStatus] = React.useState('');
     const loggedInUser = JSON.parse(localStorage.getItem('user')); // Retrieve user data from localStorage
@@ -22,33 +22,33 @@ function Withdraw() {
       />
     );
   }
-  function WithdrawMsg(props){
+  const WithdrawMsg = ({setShow, setStatus, user }) => {
     return(<>
-      <h5>Success {props.user.name}, your new balance is {props.user.balance} dollars</h5>
+      <h5>Success {user.name}, your new balance is {user.balance} dollars</h5>
       <button type="submit" 
         className="btn btn-light" 
         onClick={() => {
-          props.setShow(true);
-          props.setStatus('');
+          setShow(true);
+          setStatus('');
         }}>
           Withdraw again
       </button>
     </>);
   }
-  function WithdrawForm(props) {
+  const WithdrawForm = ({user, setStatus, setShow}) => {
     const [amount, setAmount] = React.useState('');
   
     function handle() {
-      fetch(`/account/update/${props.user.email}/-${amount}`) // Assuming the email is stored in user.email
+      fetch(`/account/update/${user.email}/-${amount}`) // Assuming the email is stored in user.email
         .then(response => response.text())
         .then(text => {
           try {
             const data = JSON.parse(text);
-            props.setStatus(JSON.stringify(data.value));
-            props.setShow(false);
+            setStatus(JSON.stringify(data.value));
+            setShow(false);
             console.log('JSON:', data);
           } catch (err) {
-            props.setStatus('Withdrawal failed');
+            setStatus('Withdrawal failed');
             console.log('err:', text);
           }
         });
@@ -56,7 +56,7 @@ function Withdraw() {
   
     return (
       <>
-        Welcome Back: {props.user.name} {/* Display the user's name */}
+        Welcome Back: {user.name} {/* Display the user's name */}
         <br />
         Amount<br />
         <input
