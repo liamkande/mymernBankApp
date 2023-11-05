@@ -1,78 +1,100 @@
-const { MongoClient } = require('mongodb')
-const url = 'mongodb://localhost:27017'
-const dbName = 'myproject'
+const admin = require('firebase-admin');
 
-// Function to connect to the MongoDB database
-async function connectToDatabase() {
+// Initialize Firebase Admin with your service account credentials
+const serviceAccount = require('./serviceAccountKey.json');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  // Other Firebase config options here
+});
+
+const db = admin.firestore();
+const usersCollection = db.collection('users');
+
+// Function to create a user
+const create = async (name, email, password, displayName, balance) => {
   try {
-    const client = await MongoClient.connect(url, { useUnifiedTopology: true })
-    console.log('Connected successfully to db server')
-    return client.db(dbName)
+    const user = await admin.auth().createUser({
+      email,
+      password,
+      displayName,
+      name,
+      balance,
+    });
+    // Create a Firestore document for the user
+    await usersCollection.doc(user.uid).set({ email, name, displayName, balance: 0 });
+    return user;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-// Create a user account
-async function create(name, email, password) {
+// Find user account
+const find = async (email) => {
   try {
-    const db = await connectToDatabase()
-    const collection = db.collection('users')
-    const doc = { name, email, password, balance: 0 }
-    const result = await collection.insertOne(doc)
-    return result.ops[0]
-  } catch (error) {
-    throw error
-  }
-}
+    const snapshot = await usersCollection.where('email', '==', email).get();
+    const users = [];
 
-// Find user accounts
-async function find(email) {
+    snapshot.forEach((userDoc) => {
+      const user = userDoc.data();
+      users.push({ ...user, id: userDoc.id });
+    });
+
+    return users;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Find one user by email (alternative to 'find')
+const findOne = async (email) => {
   try {
-    const db = await connectToDatabase()
-    const collection = db.collection('users')
-    return await collection.find({ email }).toArray()
-  } catch (error) {
-    throw error
-  }
-}
+    const snapshot = await usersCollection.where('email', '==', email).limit(1).get();
+    if (!snapshot.empty) {
+      const userDoc = snapshot.docs[0];
+      return { ...userDoc.data(), id: userDoc.id };
+    }
 
-// Find one user account (alternative to 'find')
-async function findOne(email) {
+    return null;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Update - deposit/withdraw amount (protected route)
+const update = async (email, amount) => {
   try {
-    const db = await connectToDatabase()
-    const collection = db.collection('users')
-    return await collection.findOne({ email })
-  } catch (error) {
-    throw error
-  }
-}
+    const users = await find(email);
 
-// Update - deposit/withdraw amount
-async function update(email, amount) {
+    if (users.length > 0) {
+      const user = users[0];
+      const newBalance = (user.balance || 0) + amount;
+
+      await usersCollection.doc(user.id).update({ balance: newBalance });
+
+      return { success: true, value: { ...user, balance: newBalance } };
+    } else {
+      throw new Error('User not found');
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Function to get a list of all accounts
+const all = async () => {
   try {
-    const db = await connectToDatabase()
-    const collection = db.collection('users')
-    const result = await collection.findOneAndUpdate(
-      { email },
-      { $inc: { balance: amount } },
-      { returnOriginal: false }
-    )
-    return result.value
-  } catch (error) {
-    throw error
-  }
-}
+    const querySnapshot = await usersCollection.get();
+    const accounts = [];
 
-// Get all user accounts
-async function all() {
-  try {
-    const db = await connectToDatabase()
-    const collection = db.collection('users')
-    return await collection.find({}).toArray()
-  } catch (error) {
-    throw error
-  }
-}
+    querySnapshot.forEach((userDoc) => {
+      const account = userDoc.data();
+      accounts.push(account);
+    });
 
-module.exports = { create, findOne, find, update, all }
+    return accounts;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { create, update, all, find };
